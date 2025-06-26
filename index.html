@@ -1,28 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Password to Close</title>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
-    </style>
+    <meta charset="UTF-8" />
+    <title>Password on Close</title>
 </head>
 <body>
-    <h1>Welcome to Dummies AI!</h1>
-    <p>You must enter the password to close this window.</p>
-    <p>Password: <input type="password" id="password"></p>
-    <button onclick="checkPassword()">Close Window</button>
+    <h1>Try to close this page</h1>
+    <p>A password prompt cannot be enforced by browsers on close, but you will get a confirmation alert.</p>
 
     <script>
-        function checkPassword() {
-            var password = document.getElementById("password").value;
-            if (password === "letmein") {  // Here "letmein" is the example password
-                window.close(); // This will only work if the page was opened with window.open() from another window
-                alert("Page is closing... but note: window.close() does not always work due to browser restrictions!");
-            } else {
-                alert("Wrong password, try again!");
-            }
-        }
+        window.addEventListener('beforeunload', function (e) {
+            // Standard message is ignored by most browsers, but returning a value triggers the dialog
+            e.preventDefault(); 
+            e.returnValue = 'You must enter the password to close the page.';
+            // The browser will show its own confirmation dialog
+        });
     </script>
 </body>
 </html>
